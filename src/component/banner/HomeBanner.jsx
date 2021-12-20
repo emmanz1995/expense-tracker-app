@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyledBanner, BannerWrapper, BannerContentIntro, BannerContentInfo } from './styles';
 import CashImg from '../../assets/data.svg';
+import useHistoryHook from '../../hooks/useHistory';
 
 const HomeBanner = () => {
+    const { navigate } = useHistoryHook();
     return (
         <StyledBanner>
             <BannerWrapper>
@@ -13,7 +15,7 @@ const HomeBanner = () => {
                     </div><br />
                     <span className="info">
                         <input type="text" placeholder="Your Email" className="input-style" />{' '}
-                        <button className="btn get-started-btn">Get Started</button>
+                        <button className="btn get-started-btn" onClick={() => navigate('/register')}>Get Started</button>
                     </span>
                 </BannerContentIntro>
                 <BannerContentInfo>

@@ -11,8 +11,8 @@ const Navbar = () => {
                 <i className="fas fa-bars" onClick={openMenu} />
             </div>
             <ul className={!isOpen ? "menu open-menu" : "open-menu"}>
-                <li><a href="">Login</a></li>
-                <li><a href="">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
             </ul>
         </StyledNavbar>
     );

@@ -54,20 +54,21 @@ export const StyledNavbar = styled.div`
     }
     .open-menu {
       width: 100%;
-      background-color: #2043b6;
+      //background-color: #F6F8F9;
+      background: rgba(0, 0, 0, 0.5);
       height: 100px;
       position: absolute;
-      top: 55px;
+      top: 48px;
       left: 0;
       margin: 0;
       padding: 5px;
-      border-radius: 4px;
+      border-radius: 0 0 5px 5px;
       li {
         list-style: none;
       }
       a {
         text-decoration: none;
-        color: #fafbff;
+        color: #fff;
       }
     }
   }
