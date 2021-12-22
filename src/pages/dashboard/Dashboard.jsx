@@ -15,7 +15,7 @@ function Dashboard() {
             <DashboardContainer>
                 <div className="wrapper">
                     <div className="dashboard-header">
-                        <h1>Dashboard</h1>
+                        <h2>Dashboard</h2>
                         <StyledModalButton type="submit" onClick={() => (!openModal ? open() : close())} value="Add Expense" />
                         <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
                             {openModal && <ExpenseModal openModal={openModal} handleClose={close} />}

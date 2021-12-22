@@ -38,9 +38,9 @@ export const ModalContainer = styled(motion.div)`
 
 export const ModalInput = styled(StyledInput)`
   padding: 9px;
-`
+`;
 
 export const StyledModalButton = styled(StyledButton)`
   width: 150px;
   margin: 1px 10px;
-`
+`;
