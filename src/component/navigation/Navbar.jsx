@@ -27,9 +27,10 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <li><a href="/">Expenses</a></li>
-                        <li><a href="/">Incomes</a></li>
+                        {/*<li><a href="/">Expenses</a></li>*/}
+                        {/*<li><a href="/">Incomes</a></li>*/}
                         <li><a href="" onClick={handleLogout}>Log Out</a></li>
+                        <li><a href="/">Emmanz95</a></li>
                     </>
                 )}
             </ul>

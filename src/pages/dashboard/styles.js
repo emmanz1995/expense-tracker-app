@@ -4,7 +4,7 @@ export const DashboardContainer = styled.main`
   margin: 100px 0;
   .wrapper {
     margin: 0 auto;
-    max-width: 1230px;
+    max-width: 1200px;
   }
   .dashboard-header {
     display: flex;

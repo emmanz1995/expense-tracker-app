@@ -28,7 +28,7 @@ export const StyledNavbar = styled.div`
     list-style: none;
     display: flex;
     align-items: center;
-    grid-gap: 10px;
+    grid-gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     a {
