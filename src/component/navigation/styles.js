@@ -33,9 +33,6 @@ export const StyledNavbar = styled.div`
     margin: 0 auto;
     a {
       text-decoration: none;
-      padding: 10px;
-      border: 1px solid #2043b6;
-      border-radius: 5px;
       color: #2043b6;
     }
   }
