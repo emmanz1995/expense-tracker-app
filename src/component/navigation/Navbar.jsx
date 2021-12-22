@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyledNavbar } from './styles';
 import useHistoryHook from '../../hooks/useHistory';
-import API from '../../API';
+import AuthAPI from '../../api/AuthAPI';
 
 const Navbar = () => {
     const { navigate } = useHistoryHook();
@@ -10,7 +10,7 @@ const Navbar = () => {
     const openMenu = () => setIsOpen(!isOpen);
     const handleLogout = (evt) => {
         evt.preventDefault();
-        API.onLogout()
+        AuthAPI.onLogout()
         navigate('/');
     }
     return (
@@ -27,10 +27,8 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        {/*<li><a href="/">Expenses</a></li>*/}
-                        {/*<li><a href="/">Incomes</a></li>*/}
                         <li><a href="" onClick={handleLogout}>Log Out</a></li>
-                        <li><a href="/">Emmanz95</a></li>
+                        <li><a href="/dashboard">Emmanz95</a></li>
                     </>
                 )}
             </ul>

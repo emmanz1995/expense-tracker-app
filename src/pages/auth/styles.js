@@ -30,6 +30,13 @@ export const LoginForm = styled.form`
   .input-container {
     margin: 15px 0;
   }
+  .error-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+  }
 `;
 
 export const StyledInput = styled.input`

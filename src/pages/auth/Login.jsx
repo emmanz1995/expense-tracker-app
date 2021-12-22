@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LoginBackground, FormBackground, LoginForm, StyledInput, StyledButton, StyledLink } from './styles';
-import API from '../../API';
+import AuthAPI from '../../api/AuthAPI';
 import useHistoryHook from '../../hooks/useHistory';
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
     const [loginValues, setLoginValues] = useState(stateValues);
     const [loading, setLoading] = useState(false);
     const [revealPassword, setRevealPassword] = useState(false);
+    const [error, setError] = useState('');
 
     const toggleRevealPassword = () => setRevealPassword(!revealPassword);
     const handleChange = (evt) => {
@@ -25,11 +26,12 @@ function Login() {
             email: loginValues.email,
             password: loginValues.password
         }
-        API.onLogin(formData).then((results) => {
+        AuthAPI.onLogin(formData).then((results) => {
             console.log('Login results:', results);
             navigate('/dashboard');
         }).catch((error) => {
-            console.log(error.statusCode);
+            console.log(error.response.data.msg);
+            setError(error.response.data.msg);
         })
     }
     return (
@@ -37,6 +39,7 @@ function Login() {
             <FormBackground>
                 <LoginForm>
                     <h1>Login</h1>
+                    {error && <p className="error-alert">{error}</p>}
                     <div className="input-container">
                         <label htmlFor="">Email:</label><br />
                         <StyledInput type="text" name="email" placeholder="john.doe@gmail.com" value={loginValues.email} onChange={handleChange} />

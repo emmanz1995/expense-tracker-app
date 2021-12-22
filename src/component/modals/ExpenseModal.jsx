@@ -28,7 +28,7 @@ const ExpenseModal = ({ handleClose }) => {
         <Backdrop onClick={handleClose}>
             <ModalContainer onClick={(evt) => evt.stopPropagation()} variants={dropIn} initial="hidden" animate="visible" exit="exit">
                 <div className="modal-header">
-                    <h2>Add Expense</h2>
+                    <h2>Add Income</h2>
                     <i className="far fa-times-circle fa-1x" onClick={handleClose} />
                 </div>
                 <hr />

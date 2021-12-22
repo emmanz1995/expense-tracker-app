@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_URL_API;
 
-const API = {
+const AuthAPI = {
     onLogin: (formData) => {
         return axios.post(`${API_URL}/api/user/login`, formData, {
             headers: {
@@ -20,4 +20,4 @@ const API = {
     }
 }
 
-export default API;
+export default AuthAPI;

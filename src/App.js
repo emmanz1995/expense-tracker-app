@@ -5,6 +5,8 @@ import { GlobalStyle } from './config/GlobalStyles';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/dashboard/Dashboard';
+import IncomeView from "./pages/income/IncomeView";
+import ExpenseView from "./pages/expense/ExpenseView";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/income" element={<IncomeView />} />
+          <Route path="/expense" element={<ExpenseView />} />
         </Routes>
       </Router>
     </div>
