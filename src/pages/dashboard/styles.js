@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const DashboardContainer = styled.main`
   margin: 100px 0;
-  .wrapper {
+  .stats-wrapper {
     margin: 0 auto;
     max-width: 1200px;
-  }
-  .dashboard-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    grid-gap: 20px;
   }
 `

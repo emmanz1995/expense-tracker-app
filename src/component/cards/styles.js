@@ -18,3 +18,11 @@ export const Card = styled.div`
     //margin: 10px;
   }
 `;
+
+export const StyledDashboardCard = styled(Card)`
+  -webkit-box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  -moz-box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  padding: 20px;
+  border: none;
+`;
