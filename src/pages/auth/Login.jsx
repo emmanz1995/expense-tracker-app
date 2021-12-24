@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { LoginBackground, FormBackground, LoginForm, StyledInput, StyledButton, StyledLink } from './styles';
 import AuthAPI from '../../api/AuthAPI';
 import useHistoryHook from '../../hooks/useHistory';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const { navigate } = useHistoryHook();
@@ -28,6 +30,7 @@ function Login() {
         }
         AuthAPI.onLogin(formData).then((results) => {
             console.log('Login results:', results);
+            toast('Successfully logged in, welcome back!');
             navigate('/dashboard');
         }).catch((error) => {
             console.log(error.response.data.msg);
@@ -52,6 +55,9 @@ function Login() {
                     <StyledButton type="submit" value="Log In" onClick={handleLogin} />
                 </LoginForm>
             </FormBackground>
+            <ToastContainer
+                position="top-center"
+            />
         </LoginBackground>
     )
 }

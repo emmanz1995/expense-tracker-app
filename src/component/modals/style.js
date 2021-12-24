@@ -21,6 +21,7 @@ export const ModalContainer = styled(motion.div)`
   border: 1px solid ${props => props.theme.main};
   border-radius: 4px;
   background-color: ${props => props.theme.primary};
+  z-index: 1000;
   .modal-header {
     display: flex;
     align-items: center;

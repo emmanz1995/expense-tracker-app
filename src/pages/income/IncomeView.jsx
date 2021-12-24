@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../component/navigation/Navbar';
-import { IncomeContainer } from './styles';
+import { IncomeContainer, Card } from './styles';
 import ExpenseModal from "../../component/modals/ExpenseModal";
 import { motion, AnimatePresence } from 'framer-motion';
 import { StyledModalButton } from '../../component/modals/style';
 import IncomeAPI from '../../api/IncomeAPI';
+import moment from 'moment';
+import useOpen from '../../hooks/useOpen';
+import { DropdownMenu, MenuItem } from 'react-bootstrap-dropdown-menu';
 
 function IncomeView() {
     const [openModal, setOpenModal] = useState(false);
@@ -23,6 +26,7 @@ function IncomeView() {
             console.log(error);
         })
     }, [])
+    const { openClose, toggle } = useOpen;
     return (
         <div>
             <Navbar />
@@ -34,14 +38,33 @@ function IncomeView() {
                         {openModal && <ExpenseModal openModal={openModal} handleClose={close} />}
                     </AnimatePresence>
                 </div>
+                <br />
                 {!loading ?
-                    <div>
-                        {incomeData?.docs.length > 0 ? incomeData?.docs?.map(income => (
-                            <div key={income.id}>
-                                £{income?.amount}
-                            </div>
-                        )): <p>No Income found</p>}
+                    <div className="card-flex">
+                        {incomeData?.docs?.length > 0 ? incomeData?.docs?.map(income => (
+                            <Card key={income.id}>
+                                <div className="header">
+                                    <h4>{income.title}</h4>
+                                    {/*<i className="fas fa-ellipsis-v" onClick={() => toggle()} />*/}
+                                    <DropdownMenu>
+                                        <MenuItem text={<i className="far fa-edit">{' '}Update</i>} />
+                                        <MenuItem text={<i className="fas fa-trash">{' '}Delete</i>} />
+                                    </DropdownMenu>
+                                </div><br />
+                                <p>{income?.description}</p>
+                                <p>£{income?.amount}</p><br />
+                                <p>Paid at: {moment(income?.createdAt).format('DD/MM/YY, hh:mm:ss')}</p>
+                                <p>Updated at: {moment(income?.updatedAt).format('DD/MM/YY, hh:mm:ss')}</p>
+                            </Card>
+                        )): <p>No Income found</p>
+                        }
                     </div> : <p>Income Loading...</p>
+                }
+                {openClose &&
+                    <div className="dropdown-menu">
+                        <span><i className="far fa-edit"> Update</i></span><br />
+                        <i className="fas fa-trash"> Delete</i>
+                    </div>
                 }
             </IncomeContainer>
         </div>

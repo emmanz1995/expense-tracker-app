@@ -2,6 +2,8 @@ import React, { /* useState */ } from 'react';
 import Navbar from "../../component/navigation/Navbar";
 import { DashboardContainer } from './styles';
 import DashboardCard from '../../component/cards/DashboardCard';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Dashboard() {
     return (
@@ -16,6 +18,9 @@ function Dashboard() {
                     </div>
                 </div>
             </DashboardContainer>
+            <ToastContainer
+                position="top-center"
+            />
         </div>
     )
 }
