@@ -22,18 +22,18 @@ export const ModalContainer = styled(motion.div)`
   border-radius: 4px;
   background-color: ${props => props.theme.primary};
   z-index: 1000;
-  .modal-header {
+  .modal-header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: ${props => props.theme.main};
-    padding: 10px;
+    padding: 15px;
     .fa-times-circle {
       cursor: pointer;
     }
   }
-  .modal-content {
-    padding: 10px;
+  .modal-content-wrapper {
+    padding: 15px;
   }
 `;
 

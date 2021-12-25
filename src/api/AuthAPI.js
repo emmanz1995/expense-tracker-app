@@ -17,6 +17,9 @@ const AuthAPI = {
     },
     onLogout: () => {
         localStorage.clear();
+    },
+    getJWT: () => {
+        return JSON.parse(localStorage.getItem('jwt'))
     }
 }
 

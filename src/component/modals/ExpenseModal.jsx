@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ModalContainer, ModalInput, StyledModalButton } from './style';
+import { ModalContainer, ModalInput } from './style';
 import Backdrop from './Backdrop';
 import { StyledButton } from '../../pages/auth/styles';
 import IncomeAPI from "../../api/IncomeAPI";
-import {toast} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const ExpenseModal = ({ handleClose }) => {
     const initialValues = {
@@ -26,6 +26,7 @@ const ExpenseModal = ({ handleClose }) => {
         IncomeAPI.onCreateIncome(formData).then((results) => {
             toast('Successfully posted new Income!');
             console.log(results);
+            handleClose()
         }, (error) => {
             console.log(error.response.data.msg);
         })
@@ -53,12 +54,12 @@ const ExpenseModal = ({ handleClose }) => {
     return (
         <Backdrop onClick={handleClose}>
             <ModalContainer onClick={(evt) => evt.stopPropagation()} variants={dropIn} initial="hidden" animate="visible" exit="exit">
-                <div className="modal-header">
+                <div className="modal-header-container">
                     <h2>Add Income</h2>
                     <i className="far fa-times-circle fa-1x" onClick={handleClose} />
                 </div>
                 <hr />
-                <div className="modal-content">
+                <div className="modal-content-wrapper">
                     <form onSubmit={handleCreateIncome}>
                         <div>
                             <label htmlFor="title">Title:</label>
@@ -75,11 +76,10 @@ const ExpenseModal = ({ handleClose }) => {
                         <StyledButton type="submit" value="Add Expense" />
                     </form>
                 </div>
-                {/*<hr />*/}
-                {/*<div className="modal-footer">*/}
-                {/*    <StyledModalButton type="submit" value="Close" onClick={handleClose} />*/}
-                {/*</div>*/}
             </ModalContainer>
+            <ToastContainer
+                position="top-center"
+            />
         </Backdrop>
     );
 }

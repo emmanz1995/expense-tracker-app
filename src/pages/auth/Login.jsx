@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { LoginBackground, FormBackground, LoginForm, StyledInput, StyledButton, StyledLink } from './styles';
 import AuthAPI from '../../api/AuthAPI';
 import useHistoryHook from '../../hooks/useHistory';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Navigate, Redirect } from 'react-router-dom';
 
 function Login() {
     const { navigate } = useHistoryHook();
@@ -28,14 +29,20 @@ function Login() {
             email: loginValues.email,
             password: loginValues.password
         }
+        setLoading(true);
         AuthAPI.onLogin(formData).then((results) => {
             console.log('Login results:', results);
             toast('Successfully logged in, welcome back!');
             navigate('/dashboard');
+            setLoading(false);
         }).catch((error) => {
             console.log(error.response.data.msg);
             setError(error.response.data.msg);
+            setLoading(false);
         })
+    }
+    if(AuthAPI.getJWT()) {
+        return <Navigate to={{ pathname: '/dashboard' }} />
     }
     return (
         <LoginBackground>
@@ -52,12 +59,9 @@ function Login() {
                         <StyledInput type={revealPassword ? 'text' : 'password'} name="password" placeholder="************************" value={loginValues.password} onChange={handleChange} />
                     </div>
                     <StyledLink to="" className="" onClick={toggleRevealPassword}>{!revealPassword ? <i className="far fa-eye" /> : <i className="far fa-eye-slash" />}</StyledLink>
-                    <StyledButton type="submit" value="Log In" onClick={handleLogin} />
+                    <StyledButton type="submit" value={loading ? "Logging in..." : "Log In"} onClick={handleLogin} disable={loading} />
                 </LoginForm>
             </FormBackground>
-            <ToastContainer
-                position="top-center"
-            />
         </LoginBackground>
     )
 }
