@@ -20,6 +20,15 @@ const AuthAPI = {
     },
     getJWT: () => {
         return JSON.parse(localStorage.getItem('jwt'))
+    },
+    onRegister: (formData) => {
+        return axios.post(`${API_URL}/api/user/register`, formData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            return response.data;
+        })
     }
 }
 

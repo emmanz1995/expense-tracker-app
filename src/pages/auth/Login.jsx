@@ -4,7 +4,7 @@ import AuthAPI from '../../api/AuthAPI';
 import useHistoryHook from '../../hooks/useHistory';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Navigate, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
     const { navigate } = useHistoryHook();
