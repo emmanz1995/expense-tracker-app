@@ -5,7 +5,7 @@ import { StyledButton } from '../../pages/auth/styles';
 import IncomeAPI from "../../api/IncomeAPI";
 import { toast, ToastContainer } from "react-toastify";
 
-const ExpenseModal = ({ handleClose }) => {
+const ExpenseModal = ({ handleClose, onAddIncome }) => {
     const initialValues = {
         title: '',
         description: '',
@@ -23,13 +23,7 @@ const ExpenseModal = ({ handleClose }) => {
             description: formValues.description,
             amount: formValues.amount
         }
-        IncomeAPI.onCreateIncome(formData).then((results) => {
-            toast('Successfully posted new Income!');
-            console.log(results);
-            handleClose()
-        }, (error) => {
-            console.log(error.response.data.msg);
-        })
+        onAddIncome(formData);
     }
     const dropIn = {
         hidden: {

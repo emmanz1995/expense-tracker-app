@@ -23,6 +23,6 @@ export const StyledDashboardCard = styled(Card)`
   -webkit-box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
   -moz-box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
   box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
-  padding: 20px;
-  border: none;
+  padding: 15px;
+  border: 1px solid #ddd;
 `;
