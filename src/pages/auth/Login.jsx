@@ -35,6 +35,7 @@ function Login() {
             toast('Successfully logged in, welcome back!');
             navigate('/dashboard');
             setLoading(false);
+            setTimeout(() => window.location.reload(), 5000);
         }).catch((error) => {
             console.log(error.response.data.msg);
             setError(error.response.data.msg);

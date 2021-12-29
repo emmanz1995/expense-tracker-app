@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyledNavbar } from './styles';
 import useHistoryHook from '../../hooks/useHistory';
 import AuthAPI from '../../api/AuthAPI';
+import useProfile from '../../hooks/useProfile';
 
 const Navbar = () => {
     const { navigate } = useHistoryHook();
@@ -13,6 +14,7 @@ const Navbar = () => {
         AuthAPI.onLogout()
         navigate('/');
     }
+    const { profileInfo } = useProfile();
     return (
         <StyledNavbar>
             <div className="nav-heading">
@@ -28,7 +30,7 @@ const Navbar = () => {
                 ) : (
                     <>
                         <li><a href="" onClick={handleLogout}>Log Out</a></li>
-                        <li><a href="/dashboard">Emmanz95</a></li>
+                        <li><a href="/dashboard">{profileInfo?.username}</a></li>
                     </>
                 )}
             </ul>
