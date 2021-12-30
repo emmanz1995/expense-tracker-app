@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StyledDashboardCard } from '../../component/cards/styles';
 
-export const IncomeContainer = styled.main`
+export const ExpenseContainer = styled.main`
   max-width: 1200px;
   margin: 90px auto;
   .dashboard-header {
@@ -29,8 +29,6 @@ export const IncomeContainer = styled.main`
       flex-direction: column;
     }
     .card-flex {
-      display: flex;
-      flex-direction: column;
       padding: 15px;
     }
   }
@@ -45,13 +43,7 @@ export const Card = styled(StyledDashboardCard)`
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
   }
-  .fa-ellipsis-v {
-    cursor: pointer;
-  }
-  .fa-trash {
-    cursor: pointer;
-  }
-  .fa-edit {
+  .fa-ellipsis-v, .fa-edit, .fa-trash {
     cursor: pointer;
   }
   @media screen and (max-width: ${props => props.theme.mobile}) {
