@@ -4,6 +4,7 @@ import { ExpenseContainer, Card } from './style';
 import useProfile from '../../hooks/useProfile';
 import ExpenseAPI from '../../api/ExpenseAPI';
 import {DropdownMenu, MenuItem} from "react-bootstrap-dropdown-menu";
+import truncate from "../../util/truncate";
 
 function ExpenseView() {
     const { profileInfo } = useProfile();
@@ -34,7 +35,7 @@ function ExpenseView() {
                                 <i className="far fa-edit" />
                             </span>
                         </div>
-                        <p>{expense?.description}</p>
+                        <p>{truncate(expense?.description, 35)}</p>
                         <p>£{expense?.amount}</p>
                     </Card>
                 )): <span>No Expenses found!</span>}
