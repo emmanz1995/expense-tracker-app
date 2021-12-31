@@ -10,48 +10,55 @@ import useOpen from '../../hooks/useOpen';
 import { toast, ToastContainer } from 'react-toastify';
 import truncate from '../../util/truncate';
 import useHistoryHook from '../../hooks/useHistory';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchIncomes, deleteIncome, addIncome } from "../../app/actions/incomes";
 
 function IncomeView() {
     const [openModal, setOpenModal] = useState(false);
     const [incomeData, setIncomeData] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const income = useSelector(state => state.incomes);
+    const dispatch = useDispatch();
+
     const open = () => setOpenModal(true);
     const close = () => setOpenModal(false);
     useEffect(() => {
         setLoading(true)
-        IncomeAPI.getIncome().then((results) => {
-            setIncomeData(results?.docs);
-            console.log(results);
-            setLoading(false);
-        }).catch((error) => {
-            setLoading(false);
+        dispatch(fetchIncomes()).then(() => {
+            setLoading(false)
+        }, (error) => {
+            setLoading(false)
             console.log(error);
-        })    }, [])
+        })
+    }, [])
     const handleDeleteIncome = (id) => {
-        IncomeAPI.onDeleteIncome(id).then((results) => {
-            if(results) {
-                console.log(results)
-                const deleteIncome = incomeData?.filter(doc => {
-                    return doc._id !== results._id;
-                })
-                setIncomeData(deleteIncome)
-                toast(`Successfully deleted id: ${results?._id}`)
-            } else {
-                return null;
-            }
-        }).catch((error) => {
+        setLoading(true)
+        dispatch(deleteIncome(id)).then(() => {
+            setLoading(false);
+            toast(`Successfully deleted id: ${income?._id}`)
+        }, (error) => {
             console.log(error);
+            setLoading(false);
         })
     }
     const handleAddIncome = (formData) => {
-        IncomeAPI.onCreateIncome(formData).then((results) => {
+        setLoading(true);
+        dispatch(addIncome(formData)).then(() => {
             toast('Successfully posted new Income!');
-            console.log(incomeData);
-            setIncomeData([ ...incomeData, results ]);
-            close()
-        }, (error) => {
-            console.log(error.response.data.msg);
+            setLoading(false);
+        }).catch((error) => {
+            console.log(error);
+            setLoading(false);
         })
+        // IncomeAPI.onCreateIncome(formData).then((results) => {
+        //     toast('Successfully posted new Income!');
+        //     console.log(incomeData);
+        //     setIncomeData([ ...incomeData, results ]);
+        //     close()
+        // }, (error) => {
+        //     console.log(error.response.data.msg);
+        // })
     }
     const { openClose, toggle } = useOpen;
     const { navigate } = useHistoryHook();
@@ -69,7 +76,7 @@ function IncomeView() {
                 <br />
                 {!loading ?
                     <div className="card-flex">
-                        {incomeData?.length > 0 ? incomeData?.map(income => (
+                        {income?.length > 0 ? income?.map(income => (
                             <Card key={income?.id}>
                                 <div className="header">
                                     <h4>{income?.title}</h4>
