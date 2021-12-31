@@ -51,14 +51,6 @@ function IncomeView() {
             console.log(error);
             setLoading(false);
         })
-        // IncomeAPI.onCreateIncome(formData).then((results) => {
-        //     toast('Successfully posted new Income!');
-        //     console.log(incomeData);
-        //     setIncomeData([ ...incomeData, results ]);
-        //     close()
-        // }, (error) => {
-        //     console.log(error.response.data.msg);
-        // })
     }
     const { openClose, toggle } = useOpen;
     const { navigate } = useHistoryHook();
