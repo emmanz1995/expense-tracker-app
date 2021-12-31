@@ -3,8 +3,11 @@ import { ModalContainer, ModalInput } from './style';
 import Backdrop from './Backdrop';
 import { StyledButton } from '../../pages/auth/styles';
 import { toast, ToastContainer } from "react-toastify";
+import {addIncome} from "../../app/actions/incomes";
+import { useDispatch } from 'react-redux';
 
 const IncomeModal = ({ handleClose, onAddIncome }) => {
+    const dispatch = useDispatch();
     const initialValues = {
         title: '',
         description: '',
@@ -22,8 +25,24 @@ const IncomeModal = ({ handleClose, onAddIncome }) => {
             description: formValues.description,
             amount: formValues.amount
         }
-        onAddIncome(formData);
+        // onAddIncome(formData);
+        // setLoading(true);
+        dispatch(addIncome(formData)).then((data) => {
+            setFormValues({
+                id: data?.id,
+                title: data?.title,
+                description: data?.description,
+                amount: data?.amount
+            })
+            toast('Successfully posted new Income!');
+            // setLoading(false);
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+            // setLoading(false);
+        })
     }
+
     const dropIn = {
         hidden: {
             y : "-100vh",
