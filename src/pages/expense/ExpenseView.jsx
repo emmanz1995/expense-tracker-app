@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../../component/navigation/Navbar";
+import Navbar from '../../component/navigation/Navbar';
 import { ExpenseContainer, Card } from './style';
 import useProfile from '../../hooks/useProfile';
 import ExpenseAPI from '../../api/ExpenseAPI';
-import {DropdownMenu, MenuItem} from "react-bootstrap-dropdown-menu";
-import truncate from "../../util/truncate";
+import truncate from '../../util/truncate';
+import { toast, ToastContainer } from 'react-toastify';
+import useHistoryHook from "../../hooks/useHistory";
+
 
 function ExpenseView() {
     const { profileInfo } = useProfile();
@@ -15,9 +17,25 @@ function ExpenseView() {
     function getExpenses() {
         ExpenseAPI.get().then((results) => {
             setData(results?.docs);
-            console.log(results.docs);
+            console.log(results?.docs);
         }).catch((error) => console.log(error));
     }
+
+    function handleDelete(id) {
+        ExpenseAPI.delete(id).then((results) => {
+            if(results) {
+                console.log(results)
+                const deleteExpense = data?.filter(doc => {
+                    return doc?._id !== results?._id;
+                })
+                setData(deleteExpense);
+            } else {
+                return null
+            }
+            toast(`Successfully deleted ${results?._id}`);
+        }).catch((error) => console.log(error));
+    }
+    const { navigate } = useHistoryHook();
     return (
         <ExpenseContainer>
             <Navbar />
@@ -31,8 +49,8 @@ function ExpenseView() {
                         <div className="header">
                             <h4>{expense?.title}</h4>
                             <span>
-                                <i className="fas fa-trash" />{' '}
-                                <i className="far fa-edit" />
+                                <i className="fas fa-trash" onClick={() => handleDelete(expense?._id)} />{' '}
+                                <i className="far fa-edit" onClick={() => navigate(`/update-expense/${expense?._id}`)} />
                             </span>
                         </div>
                         <p>{truncate(expense?.description, 35)}</p>
@@ -40,6 +58,9 @@ function ExpenseView() {
                     </Card>
                 )): <span>No Expenses found!</span>}
             </div>
+            <ToastContainer
+                position="top-center"
+            />
         </ExpenseContainer>
     )
 }

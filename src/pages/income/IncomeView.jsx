@@ -7,9 +7,9 @@ import { StyledModalButton } from '../../component/modals/style';
 import IncomeAPI from '../../api/IncomeAPI';
 import moment from 'moment';
 import useOpen from '../../hooks/useOpen';
-import { DropdownMenu, MenuItem } from 'react-bootstrap-dropdown-menu';
 import { toast, ToastContainer } from 'react-toastify';
 import truncate from '../../util/truncate';
+import useHistoryHook from '../../hooks/useHistory';
 
 function IncomeView() {
     const [openModal, setOpenModal] = useState(false);
@@ -54,6 +54,7 @@ function IncomeView() {
         })
     }
     const { openClose, toggle } = useOpen;
+    const { navigate } = useHistoryHook();
     return (
         <div>
             <Navbar />
@@ -74,7 +75,7 @@ function IncomeView() {
                                     <h4>{income?.title}</h4>
                                     {/*<i className="fas fa-ellipsis-v" onClick={() => toggle()} />*/}
                                     <span>
-                                        <i className="far fa-edit" />{' '}
+                                        <i className="far fa-edit" onClick={() => navigate(`/update-income/${income?._id}`)}/>{' '}
                                         <i className="fas fa-trash" onClick={() => handleDeleteIncome(income?._id)} />
                                     </span>
                                 </div>
