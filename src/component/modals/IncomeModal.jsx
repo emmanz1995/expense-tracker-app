@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { addIncome } from '../../app/actions/incomes';
 import { useDispatch } from 'react-redux';
 
-const IncomeModal = ({ handleClose, onAddIncome }) => {
+const IncomeModal = ({ handleClose }) => {
     const dispatch = useDispatch();
     const initialValues = {
         title: '',
