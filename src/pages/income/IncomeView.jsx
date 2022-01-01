@@ -42,16 +42,6 @@ function IncomeView() {
             setLoading(false);
         })
     }
-    // const handleAddIncome = (formData) => {
-    //     setLoading(true);
-    //     dispatch(addIncome(formData)).then(() => {
-    //         toast('Successfully posted new Income!');
-    //         setLoading(false);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         setLoading(false);
-    //     })
-    // }
     const { openClose, toggle } = useOpen;
     const { navigate } = useHistoryHook();
     return (
