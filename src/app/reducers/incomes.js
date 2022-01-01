@@ -11,7 +11,7 @@ function incomeReducer(incomes = initialState, action) {
     const { type, payload } = action;
     switch (type) {
         case CREATE_INCOME:
-            return [incomes, payload]
+            return [...incomes, payload]
         case GET_INCOMES:
             return payload.docs;
         case DELETE_INCOME:

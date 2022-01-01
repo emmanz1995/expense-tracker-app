@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { ModalContainer, ModalInput } from './style';
 import Backdrop from './Backdrop';
 import { StyledButton } from '../../pages/auth/styles';
-import { toast, ToastContainer } from "react-toastify";
-import {addIncome} from "../../app/actions/incomes";
+import { toast, ToastContainer } from 'react-toastify';
+import { addIncome } from '../../app/actions/incomes';
 import { useDispatch } from 'react-redux';
 
 const IncomeModal = ({ handleClose, onAddIncome }) => {
@@ -14,6 +14,7 @@ const IncomeModal = ({ handleClose, onAddIncome }) => {
         amount: ''
     }
     const [formValues, setFormValues] = useState(initialValues);
+    const [loading, setLoading] = useState(false);
     const handleChange = (evt) => {
         const { name, value } = evt.target;
         setFormValues({ ...formValues, [name]: value });
@@ -25,8 +26,7 @@ const IncomeModal = ({ handleClose, onAddIncome }) => {
             description: formValues.description,
             amount: formValues.amount
         }
-        // onAddIncome(formData);
-        // setLoading(true);
+        setLoading(true);
         dispatch(addIncome(formData)).then((data) => {
             setFormValues({
                 id: data?.id,
@@ -35,11 +35,11 @@ const IncomeModal = ({ handleClose, onAddIncome }) => {
                 amount: data?.amount
             })
             toast('Successfully posted new Income!');
-            // setLoading(false);
-            console.log(data);
+            setLoading(false);
+            handleClose()
         }).catch((error) => {
             console.log(error);
-            // setLoading(false);
+            setLoading(false);
         })
     }
 
@@ -85,7 +85,7 @@ const IncomeModal = ({ handleClose, onAddIncome }) => {
                             <label htmlFor="amount">Amount:</label>
                             <ModalInput type="text" name="amount" placeholder="£3.50..." value={formValues.amount} onChange={handleChange} />
                         </div><br />
-                        <StyledButton type="submit" value="Add Expense" />
+                        <StyledButton type="submit" value={loading ? "Loading..." : "Add Expense"} disabled={loading} />
                     </form>
                 </div>
             </ModalContainer>

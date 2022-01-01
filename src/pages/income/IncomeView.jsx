@@ -42,16 +42,16 @@ function IncomeView() {
             setLoading(false);
         })
     }
-    const handleAddIncome = (formData) => {
-        setLoading(true);
-        dispatch(addIncome(formData)).then(() => {
-            toast('Successfully posted new Income!');
-            setLoading(false);
-        }).catch((error) => {
-            console.log(error);
-            setLoading(false);
-        })
-    }
+    // const handleAddIncome = (formData) => {
+    //     setLoading(true);
+    //     dispatch(addIncome(formData)).then(() => {
+    //         toast('Successfully posted new Income!');
+    //         setLoading(false);
+    //     }).catch((error) => {
+    //         console.log(error);
+    //         setLoading(false);
+    //     })
+    // }
     const { openClose, toggle } = useOpen;
     const { navigate } = useHistoryHook();
     return (
@@ -62,7 +62,7 @@ function IncomeView() {
                     <h3>Emmanuel's Income</h3>
                     <StyledModalButton type="submit" onClick={() => (!openModal ? open() : close())} value="Add Income" />
                     <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
-                        {openModal && <IncomeModal openModal={openModal} handleClose={close} onAddIncome={handleAddIncome} />}
+                        {openModal && <IncomeModal openModal={openModal} handleClose={close} />}
                     </AnimatePresence>
                 </div>
                 <br />
