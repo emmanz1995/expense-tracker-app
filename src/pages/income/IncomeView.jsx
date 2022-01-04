@@ -15,7 +15,6 @@ import { fetchIncomes, deleteIncome, addIncome } from "../../app/actions/incomes
 
 function IncomeView() {
     const [openModal, setOpenModal] = useState(false);
-    const [incomeData, setIncomeData] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const income = useSelector(state => state.incomes);

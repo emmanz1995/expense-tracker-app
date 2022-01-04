@@ -5,22 +5,21 @@ import useProfile from '../../hooks/useProfile';
 import ExpenseAPI from '../../api/ExpenseAPI';
 import truncate from '../../util/truncate';
 import { toast, ToastContainer } from 'react-toastify';
-import useHistoryHook from "../../hooks/useHistory";
+import useHistoryHook from '../../hooks/useHistory';
+import { useDispatch, useSelector } from 'react-redux';
+import { getExpenses } from '../../app/actions/expenses';
 
 
 function ExpenseView() {
-    const { profileInfo } = useProfile();
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        return getExpenses();
-    }, [])
-    function getExpenses() {
-        ExpenseAPI.get().then((results) => {
-            setData(results?.docs);
-            console.log(results?.docs);
-        }).catch((error) => console.log(error));
-    }
+    const expense = useSelector(state => state.expenses)
+    const dispatch = useDispatch
 
+    useEffect(() => {
+        dispatch(getExpenses())
+    }, [])
+
+    const [data, setData] = useState([]);
+    const { profileInfo } = useProfile();
     function handleDelete(id) {
         ExpenseAPI.delete(id).then((results) => {
             if(results) {
@@ -44,7 +43,7 @@ function ExpenseView() {
                 {/*<span></span>*/}
             </div><br />
             <div className="card-flex">
-                {data?.length > 0 ? data?.map(expense => (
+                {expense?.length > 0 ? expense?.map(expense => (
                     <Card key={expense?._id}>
                         <div className="header">
                             <h4>{expense?.title}</h4>

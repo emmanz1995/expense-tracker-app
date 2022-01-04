@@ -32,6 +32,17 @@ class API {
             }
         })
     }
+
+    getExpenses() {
+        return axios.get(`${API_URL}/api/expense/getexpenses`, {
+            params: {
+                page: 1
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
 }
 
 export default new API();
