@@ -4,18 +4,18 @@ import { Card, IncomeContainer } from './styles';
 import IncomeModal from '../../component/modals/IncomeModal';
 import { AnimatePresence } from 'framer-motion';
 import { StyledModalButton } from '../../component/modals/style';
-import IncomeAPI from '../../api/IncomeAPI';
-import moment from 'moment';
 import useOpen from '../../hooks/useOpen';
 import { toast, ToastContainer } from 'react-toastify';
 import truncate from '../../util/truncate';
 import useHistoryHook from '../../hooks/useHistory';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchIncomes, deleteIncome, addIncome } from "../../app/actions/incomes";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchIncomes, deleteIncome, addIncome } from '../../app/actions/incomes';
+import useProfile from '../../hooks/useProfile';
 
 function IncomeView() {
     const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const { profileInfo } = useProfile();
 
     const income = useSelector(state => state.incomes);
     const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function IncomeView() {
         setLoading(true)
         dispatch(deleteIncome(id)).then(() => {
             setLoading(false);
-            toast(`Successfully deleted id: ${income?._id}`)
+            toast(`Income successfully deleted!`)
         }, (error) => {
             console.log(error);
             setLoading(false);
@@ -48,7 +48,7 @@ function IncomeView() {
             <Navbar />
             <IncomeContainer>
                 <div className="dashboard-header">
-                    <h3>Emmanuel's Income</h3>
+                    <h3>{profileInfo?.username}'s Income</h3>
                     <StyledModalButton type="submit" onClick={() => (!openModal ? open() : close())} value="Add Income" />
                     <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
                         {openModal && <IncomeModal openModal={openModal} handleClose={close} />}

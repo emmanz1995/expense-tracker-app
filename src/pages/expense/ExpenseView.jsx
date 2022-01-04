@@ -12,28 +12,35 @@ import { getExpenses } from '../../app/actions/expenses';
 
 function ExpenseView() {
     const expense = useSelector(state => state.expenses)
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false);
+    const { profileInfo } = useProfile();
 
     useEffect(() => {
-        dispatch(getExpenses())
-    }, [])
+        setLoading(true);
+        dispatch(getExpenses()).then(() => {
+            setLoading(false);
+        }, error => {
+            console.log(error)
+            setLoading(false);
+        })
+    }, [dispatch])
 
-    const [data, setData] = useState([]);
-    const { profileInfo } = useProfile();
-    function handleDelete(id) {
-        ExpenseAPI.delete(id).then((results) => {
-            if(results) {
-                console.log(results)
-                const deleteExpense = data?.filter(doc => {
-                    return doc?._id !== results?._id;
-                })
-                setData(deleteExpense);
-            } else {
-                return null
-            }
-            toast(`Successfully deleted ${results?._id}`);
-        }).catch((error) => console.log(error));
-    }
+
+    // function handleDelete(id) {
+    //     ExpenseAPI.delete(id).then((results) => {
+    //         if(results) {
+    //             console.log(results)
+    //             const deleteExpense = data?.filter(doc => {
+    //                 return doc?._id !== results?._id;
+    //             })
+    //             setData(deleteExpense);
+    //         } else {
+    //             return null
+    //         }
+    //         toast(`Successfully deleted ${results?._id}`);
+    //     }).catch((error) => console.log(error));
+    // }
     const { navigate } = useHistoryHook();
     return (
         <ExpenseContainer>
@@ -42,21 +49,23 @@ function ExpenseView() {
                 <h3>{profileInfo.username}'s Expenses</h3>
                 {/*<span></span>*/}
             </div><br />
-            <div className="card-flex">
-                {expense?.length > 0 ? expense?.map(expense => (
-                    <Card key={expense?._id}>
-                        <div className="header">
-                            <h4>{expense?.title}</h4>
-                            <span>
-                                <i className="fas fa-trash" onClick={() => handleDelete(expense?._id)} />{' '}
-                                <i className="far fa-edit" onClick={() => navigate(`/update-expense/${expense?._id}`)} />
+            {!loading ?
+                <div className="card-flex">
+                    {expense?.length > 0 ? expense?.map(expense => (
+                        <Card key={expense?._id}>
+                            <div className="header">
+                                <h4>{expense?.title}</h4>
+                                <span>
+                                <i className="fas fa-trash" /* onClick={() => handleDelete(expense?._id)} */ />{' '}
+                                    <i className="far fa-edit" onClick={() => navigate(`/update-expense/${expense?._id}`)} />
                             </span>
-                        </div>
-                        <p>{truncate(expense?.description, 35)}</p>
-                        <p>£{expense?.amount}</p>
-                    </Card>
-                )): <span>No Expenses found!</span>}
-            </div>
+                            </div>
+                            <p>{truncate(expense?.description, 35)}</p>
+                            <p>£{expense?.amount}</p>
+                        </Card>
+                    )): <span>No Expenses found!</span>}
+                </div>: <p>Expenses are Loading...</p>
+            }
             <ToastContainer
                 position="top-center"
             />

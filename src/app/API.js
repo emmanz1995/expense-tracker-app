@@ -43,6 +43,21 @@ class API {
             }
         })
     }
+    onCreateExpenses(formData) {
+        return axios.post(`${API_URL}/api/expense/create`, formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+    onDeleteExpenses(id) {
+        return axios.delete(`${API_URL}/api/expense/deleteexpense/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
 }
 
 export default new API();

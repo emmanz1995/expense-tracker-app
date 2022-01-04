@@ -1,8 +1,8 @@
 import {
-    GET_INCOMES,
     CREATE_INCOME,
+    GET_INCOMES,
+    UPDATE_INCOME,
     DELETE_INCOME,
-    UPDATE_INCOME
 } from '../index';
 
 const initialState = [];
