@@ -5,8 +5,8 @@ const API_URL = process.env.REACT_APP_URL_API;
 const token = JSON.parse(localStorage.getItem('jwt'));
 
 const IncomeAPI = {
-    getIncome: () => {
-        return axios.get(`${API_URL}/api/income/getincomes?page=1`, {
+    getSingleIncome: (id) => {
+        return axios.get(`${API_URL}/api/income/getincome/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
