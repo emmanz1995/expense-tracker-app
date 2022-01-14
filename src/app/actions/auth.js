@@ -10,15 +10,18 @@ export const login = (formData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         })
+        if(response?.data?.token) {
+            localStorage.setItem('jwt', JSON.stringify(response.data.token))
+        }
         dispatch({
             type: AUTHENTICATION_SUCCESS,
-            payload: response?.data
+            payload: { token: response?.data?.token }
         })
     } catch(error) {
         dispatch({
             type: AUTHENTICATION_ERROR,
             payload: error
         })
-        console.log(error);
+        console.log(error.response.data.msg);
     }
 }

@@ -5,13 +5,21 @@ import useHistoryHook from '../../hooks/useHistory';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../app/actions/auth';
 
 function Login() {
     const { navigate } = useHistoryHook();
+    const dispatch = useDispatch();
     const stateValues = {
         email: '',
         password: ''
     }
+
+    const authState = useSelector(state => state.auth)
+    const { loginSuccess } = authState;
+
+    console.log(loginSuccess)
 
     const [loginValues, setLoginValues] = useState(stateValues);
     const [loading, setLoading] = useState(false);
@@ -30,19 +38,13 @@ function Login() {
             password: loginValues.password
         }
         setLoading(true);
-        AuthAPI.onLogin(formData).then((results) => {
-            console.log('Login results:', results);
-            toast('Successfully logged in, welcome back!');
+        dispatch(login(formData)).then(() => {
+            toast('Successfully logged in, welcome back!')
             navigate('/dashboard');
-            setLoading(false);
-            setTimeout(() => window.location.reload(), 5000);
-        }).catch((error) => {
-            console.log(error.response.data.msg);
-            setError(error.response.data.msg);
-            setLoading(false);
-        })
+            setLoading(false)
+        });
     }
-    if(AuthAPI.getJWT()) {
+    if(loginSuccess) {
         return <Navigate to={{ pathname: '/dashboard' }} />
     }
     return (

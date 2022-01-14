@@ -1,9 +1,8 @@
 import { AUTHENTICATION_SUCCESS, AUTHENTICATION_ERROR } from '../index';
 
-const initialState = {
-    loginSuccess: false,
-    loading: false,
-}
+const jwt = JSON.parse(localStorage.getItem('jwt'));
+
+const initialState = jwt ? { loginSuccess: true, jwt } : { loginSuccess: false, jwt: null }
 
 export default function(state = initialState, action) {
     const { payload, type } = action;
@@ -12,12 +11,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loginSuccess: true,
-                loading: true
+                jwt: payload,
             }
         case AUTHENTICATION_ERROR:
             return {
                 error: payload,
-                loading: false
+                token: null
             }
         default: return state
     }
