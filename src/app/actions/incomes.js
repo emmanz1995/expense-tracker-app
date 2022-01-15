@@ -39,3 +39,15 @@ export const deleteIncome = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const updateIncome = (id, formData) => async (dispatch) => {
+    try {
+        const response = await API.onUpdateIncome(id, formData)
+        dispatch({
+            type: UPDATE_INCOME,
+            payload: response?.data
+        })
+    } catch(error) {
+        console.log(error);
+    }
+}

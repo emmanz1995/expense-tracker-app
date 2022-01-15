@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { RegisterContainer, RegisterFormContainer, InfoContainer, StyledInput, StyledButton, ErrorAlert } from './styles';
+import { RegisterContainer, RegisterFormContainer, InfoContainer, ErrorAlert } from './styles';
+import { StyledButton, StyledInput } from '../../config/reusableStyles';
+
 import AuthAPI from '../../api/AuthAPI';
 import { toast, ToastContainer } from 'react-toastify';
 import useHistoryHook from '../../hooks/useHistory';

@@ -25,8 +25,8 @@ class API {
             }
         })
     }
-    onUpdateIncome(id) {
-        return axios.put(`${API_URL}/api/income/updateincome/${id}`, {
+    onUpdateIncome(id, formData) {
+        return axios.put(`${API_URL}/api/income/updateincome/${id}`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ModalContainer, ModalInput } from './style';
 import Backdrop from './Backdrop';
 import { StyledButton } from '../../pages/auth/styles';
-import IncomeAPI from "../../api/IncomeAPI";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from 'react-toastify';
+import { updateIncome } from '../../app/actions/incomes';
+import axios from 'axios';
 
-const UpdateModal = ({ handleClose, updateTitle }) => {
-
+const UpdateModal = ({ handleClose, updateTitle, id }) => {
     const dropIn2 = {
         hidden: {
             y : "-100vh",
@@ -27,6 +27,7 @@ const UpdateModal = ({ handleClose, updateTitle }) => {
             opacity: 0
         }
     }
+    console.log(id)
     return (
         <Backdrop onClick={handleClose}>
             <ModalContainer onClick={(evt) => evt.stopPropagation()} variants={dropIn2} initial="hidden" animate="visible" exit="exit">

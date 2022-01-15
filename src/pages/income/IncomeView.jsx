@@ -74,12 +74,12 @@ function IncomeView() {
                         }
                     </div> : <p>Income Loading...</p>
                 }
-                {openClose &&
-                    <div className="dropdown-menu">
-                        <span><i className="far fa-edit"> Update</i></span><br />
-                        <i className="fas fa-trash"> Delete</i>
-                    </div>
-                }
+                {/*{openClose &&*/}
+                {/*    <div className="dropdown-menu">*/}
+                {/*        <span><i className="far fa-edit"> Update</i></span><br />*/}
+                {/*        <i className="fas fa-trash"> Delete</i>*/}
+                {/*    </div>*/}
+                {/*}*/}
             </IncomeContainer>
             <ToastContainer
                 position="top-center"

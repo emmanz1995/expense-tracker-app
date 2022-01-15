@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { StyledInput, StyledButton } from '../../pages/auth/styles';
+import { StyledButton, StyledInput } from '../../config/reusableStyles';
+
 
 export const ModalBackdrop = styled(motion.main)`
   position: absolute;

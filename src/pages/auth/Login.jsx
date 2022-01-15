@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { LoginBackground, FormBackground, LoginForm, StyledInput, StyledButton, StyledLink } from './styles';
+import { LoginBackground, FormBackground, LoginForm } from './styles';
+import { StyledButton, StyledInput, StyledLink } from "../../config/reusableStyles";
+
 import AuthAPI from '../../api/AuthAPI';
 import useHistoryHook from '../../hooks/useHistory';
 import { toast } from 'react-toastify';

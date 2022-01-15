@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ModalContainer, ModalInput } from './style';
 import Backdrop from './Backdrop';
-import { StyledButton } from '../../pages/auth/styles';
+import { StyledButton } from '../../config/reusableStyles';
+
 import { toast, ToastContainer } from 'react-toastify';
 import { addIncome } from '../../app/actions/incomes';
 import { useDispatch } from 'react-redux';
